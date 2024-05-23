@@ -11,8 +11,8 @@ def solve(day=None, testfile=None):
         if len(str(day)) == 1:
             day = f"0{day}"
         module_name = f"day{str(day)}"
-        testfile = f"day{str(day)}\{testfile}"
-        module_path = os.path.join(CURRENT_DIR, f"{module_name}/{module_name}.py")
+        testfile = os.path.join(module_name, testfile)
+        module_path = os.path.join(CURRENT_DIR, os.path.join(module_name, f"{module_name}.py"))
         spec = importlib.util.spec_from_file_location(module_name, module_path)
         module = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(module)
@@ -51,7 +51,7 @@ def main():
         day_number = args.day
         if len(str(day_number)) == 1:
             day_number = f"0{day_number}"
-        puzzle_text = os.path.join(CURRENT_DIR, os.path.normcase(f"day{day_number}/puzzle.txt"))
+        puzzle_text = os.path.join(CURRENT_DIR, os.path.join(f"day{day_number}", "puzzle.txt"))
         with open(puzzle_text, 'r') as file:
             for line in file:
                 print(line)
